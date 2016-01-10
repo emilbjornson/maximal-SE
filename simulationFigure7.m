@@ -6,7 +6,7 @@
 %
 %Download article: http://arxiv.org/pdf/1412.7102
 %
-%This is version 1.0 (Last edited: 2015-10-06)
+%This is version 1.1 (Last edited: 2016-01-10)
 %
 %License: This code is licensed under the GPLv2 license. If you in any way
 %use this code for research that results in publications, please cite our
@@ -170,7 +170,7 @@ for n = 1:monteCarloRealizations
     
     %Initiate matrices where first and second order interference are computed
     interference1reuse1 = zeros(K,1);
-    interference2reuse2 = zeros(K,1);
+    interference2reuse1 = zeros(K,1);
     interference1reuse3 = zeros(K,3);
     interference2reuse3 = zeros(K,3);
     interference1reuse4 = zeros(K,4);
@@ -219,7 +219,7 @@ for n = 1:monteCarloRealizations
         
         %Compute inteference terms of the types that show up in Eq. (7)
         interference1reuse1(:,l) = interference1reuse1(:,l) + (distancesSquaredBSj./distancesSquaredBSl).^(kappa);
-        interference2reuse2(:,l) = interference2reuse2(:,l) + (distancesSquaredBSj./distancesSquaredBSl).^(2*kappa);
+        interference2reuse1(:,l) = interference2reuse1(:,l) + (distancesSquaredBSj./distancesSquaredBSl).^(2*kappa);
         
         interference1reuse3(:,reusePattern3(j)) = interference1reuse3(:,reusePattern3(j)) + (distancesSquaredBSj./distancesSquaredBSl).^(kappa);
         interference2reuse3(:,reusePattern3(j)) = interference2reuse3(:,reusePattern3(j)) + (distancesSquaredBSj./distancesSquaredBSl).^(2*kappa);
@@ -259,28 +259,28 @@ for n = 1:monteCarloRealizations
         j = 1;
         
         %Compute the SINRs in accordance to Lemma 2 for MR combining
-        SINRreuse1_MR(:,j) = m *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) + 1/SNR)*(interference1reuse1(1:K,j)+1/(B1*SNR)) + m*(interference2reuse2(1:K,j)-1));
-        SINRreuse3_MR(:,j) = m *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) + 1/SNR)*(interference1reuse3(1:K,1)+1/(B3*SNR)) + m*(interference2reuse3(1:K,1)-1));
-        SINRreuse4_MR(:,j) = m *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) + 1/SNR)*(interference1reuse4(1:K,1)+1/(B4*SNR)) + m*(interference2reuse4(1:K,1)-1));
+        SINRreuse1_MR(:,j) = m *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) + 1/SNR)*(interference1reuse1(1:K,j)+1/(B1*SNR)) + m*(interference2reuse1(1:K,j)-1));
+        SINRreuse3_MR(:,j) = m *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) + 1/SNR)*(interference1reuse3(1:K,j)+1/(B3*SNR)) + m*(interference2reuse3(1:K,j)-1));
+        SINRreuse4_MR(:,j) = m *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) + 1/SNR)*(interference1reuse4(1:K,j)+1/(B4*SNR)) + m*(interference2reuse4(1:K,j)-1));
         
         %Compute the SINRs in accordance to Lemma 2 for ZF combining
         if (m-K)>0 %Check if ZF exists
-            SINRreuse1_ZF(:,j) = (m-K) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse2(1:K,j)./(interference1reuse1(1:K,j)+1/(B1*SNR))) + 1/SNR)*( interference1reuse1(1:K,j)  +1/(B1*SNR)) + (m-K)*(interference2reuse2(1:K,j)-1));
-            SINRreuse3_ZF(:,j) = (m-K) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse3(1:K,1)./(interference1reuse3(1:K,1)+1/(B3*SNR))) + 1/SNR)*( interference1reuse3(1:K,1) +1/(B3*SNR)) + (m-K)*(interference2reuse3(1:K,1)-1));
-            SINRreuse4_ZF(:,j) = (m-K) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse4(1:K,1)./(interference1reuse4(1:K,1)+1/(B4*SNR))) + 1/SNR)*( interference1reuse4(1:K,j) +1/(B4*SNR)) + (m-K)*(interference2reuse4(1:K,1)-1));
+            SINRreuse1_ZF(:,j) = (m-K) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse1(1:K,j)./(interference1reuse1(1:K,j)+1/(B1*SNR))) + 1/SNR)*( interference1reuse1(1:K,j)  +1/(B1*SNR)) + (m-K)*(interference2reuse1(1:K,j)-1));
+            SINRreuse3_ZF(:,j) = (m-K) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse3(1:K,j)./(interference1reuse3(1:K,j)+1/(B3*SNR))) + 1/SNR)*( interference1reuse3(1:K,j) +1/(B3*SNR)) + (m-K)*(interference2reuse3(1:K,j)-1));
+            SINRreuse4_ZF(:,j) = (m-K) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse4(1:K,j)./(interference1reuse4(1:K,j)+1/(B4*SNR))) + 1/SNR)*( interference1reuse4(1:K,j) +1/(B4*SNR)) + (m-K)*(interference2reuse4(1:K,j)-1));
         end
         
         %Compute the SINRs in accordance to Lemma 2 for PZF combining
         if (m-B1)>0 %Check if PZF exists
-            SINRreuse1_PZF(:,j) = (m-B1) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse2(1:K,j)./(interference1reuse1(1:K,j)+1/(B1*SNR))) + 1/SNR)*( interference1reuse1(1:K,j)  +1/(B1*SNR)) + (m-B1)*(interference2reuse2(1:K,j)-1));
+            SINRreuse1_PZF(:,j) = (m-B1) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(interference2reuse1(1:K,j)./(interference1reuse1(1:K,j)+1/(B1*SNR))) + 1/SNR)*( interference1reuse1(1:K,j)  +1/(B1*SNR)) + (m-B1)*(interference2reuse1(1:K,j)-1));
         end
         
         if (m-B3)>0 %Check if PZF exists
-            SINRreuse3_PZF(:,j) = (m-B3) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(sum(interference2reuse3(1:K,:)./(interference1reuse3(1:K,:)+1/(B3*SNR)))) + 1/SNR)*( interference1reuse3(1:K,j) +1/(B3*SNR)) + (m-B3)*(interference2reuse3(1:K,1)-1));
+            SINRreuse3_PZF(:,j) = (m-B3) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(sum(interference2reuse3(1:K,:)./(interference1reuse3(1:K,:)+1/(B3*SNR)))) + 1/SNR)*( interference1reuse3(1:K,j) +1/(B3*SNR)) + (m-B3)*(interference2reuse3(1:K,j)-1));
         end
         
         if (m-B4)>0 %Check if PZF exists
-            SINRreuse4_PZF(:,j) = (m-B4) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(sum(interference2reuse4(1:K,:)./(interference1reuse4(1:K,:)+1/(B4*SNR)))) + 1/SNR)*( interference1reuse4(1:K,j)  +1/(B4*SNR)) + (m-B4)*(interference2reuse4(1:K,1)-1));
+            SINRreuse4_PZF(:,j) = (m-B4) *ones(K,1) ./ ( (sum(interference1reuse1(1:K,j)) - sum(sum(interference2reuse4(1:K,:)./(interference1reuse4(1:K,:)+1/(B4*SNR)))) + 1/SNR)*( interference1reuse4(1:K,j)  +1/(B4*SNR)) + (m-B4)*(interference2reuse4(1:K,j)-1));
         end
         
         
