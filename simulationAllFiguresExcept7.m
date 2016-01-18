@@ -55,7 +55,7 @@ monteCarloUEs = 1000000; %Number of random UE locations per cell
 [muValues1Mean,muValues2Mean,reuseMu1Mean,reuseMu1Mean2,reuseMu1MeanNext,reuseMu1Mean2Next,reuseMu2Mean,reuseMuMeanVariance,muValues1Worst,muValues2Worst,reuseMu1Worst,reuseMu1Worst2,reuseMu1WorstNext,reuseMu1Worst2Next,reuseMu2Worst,reuseMuWorstVariance,muValues1Best,muValues2Best,reuseMu1Best,reuseMu1Best2,reuseMu1BestNext,reuseMu1Best2Next,reuseMu2Best,reuseMuBestVariance,reuseFactor] = computeEnvironment(kappa,forbiddenRegion,monteCarloUEs);
 
 
-if simulationCase == 1 %Simulations from Section IV.A and Section V (Figures 4-6 and 13)
+if simulationCase == 1 %Simulations from Section IV.A and Section V (Figures 4-6 and 14)
     
     %Select range of BS antennas
     nbrOfMvalues = 1000; %Number of different cases
@@ -70,7 +70,7 @@ if simulationCase == 1 %Simulations from Section IV.A and Section V (Figures 4-6
     %EVM value
     epsilon2 = [0 0.1^2];
     
-elseif simulationCase == 2 %Some simulations from Section IV.B (Figures 7-10)
+elseif simulationCase == 2 %Some simulations from Section IV.B (Figures 8-11)
     
     %Select range of BS antennas
     Mvalues = 1:1000; %All antenna numbers from 1 to 1000
@@ -84,7 +84,7 @@ elseif simulationCase == 2 %Some simulations from Section IV.B (Figures 7-10)
     %EVM value
     epsilon2 = 0;
     
-elseif simulationCase == 3 %One simulation from Section IV.B (Figures 11)
+elseif simulationCase == 3 %One simulation from Section IV.B (Figure 12)
     
     %Select range of BS antennas
     Mvalues = [100 500];
@@ -101,7 +101,7 @@ elseif simulationCase == 3 %One simulation from Section IV.B (Figures 11)
     %EVM value
     epsilon2 = zeros(size(sigma2rho));
     
-elseif simulationCase == 4 %One simulation from Section IV.B (Figures 12)
+elseif simulationCase == 4 %One simulation from Section IV.B (Figure 13)
     
     %Select range of BS antennas
     Mvalues = [100 500];
