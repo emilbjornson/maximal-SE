@@ -4,7 +4,7 @@ function [muValues1Mean,muValues2Mean,reuseMu1Mean,reuseMu1Mean2,reuseMu1MeanNex
 % 
 %Emil Bjornson, Erik G. Larsson, Merouane Debbah, "Massive MIMO for Maximal
 %Spectral Efficiency: How Many Users and Pilots Should Be Allocated?,"
-%vol. 15, no. 2, pp. 1293-1308, February 2016
+%vol. 15, no. 2, pp. 1293-1308, February 2016.
 %
 %Download article: http://arxiv.org/pdf/1412.7102
 %
