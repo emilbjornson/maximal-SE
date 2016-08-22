@@ -3,11 +3,11 @@
 %
 %Emil Bjornson, Erik G. Larsson, Merouane Debbah, "Massive MIMO for Maximal
 %Spectral Efficiency: How Many Users and Pilots Should Be Allocated?,"
-%to appear in IEEE Transactions on Wireless Communications.
+%vol. 15, no. 2, pp. 1293-1308, February 2016.
 %
 %Download article: http://arxiv.org/pdf/1412.7102
 %
-%This is version 1.0 (Last edited: 2015-10-06)
+%This is version 1.1 (Last edited: 2016-08-22)
 %
 %License: This code is licensed under the GPLv2 license. If you in any way
 %use this code for research that results in publications, please cite our
