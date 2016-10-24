@@ -1,7 +1,7 @@
 Massive MIMO for Maximal Spectral Efficiency
 ==================
 
-This is a code package is related to the follow scientific article:
+This is a code package is related to the following scientific article:
 
 Emil Björnson, Erik G. Larsson, Mérouane Debbah, "[Massive MIMO for Maximal Spectral Efficiency: How Many Users and Pilots Should Be Allocated?](http://arxiv.org/pdf/1412.7102)," IEEE Transactions on Wireless Communications, vol. 15, no. 2, pp. 1293-1308, February 2016.
 
